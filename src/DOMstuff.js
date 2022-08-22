@@ -17,4 +17,20 @@ export function newItem(item, project) {
 } 
 
 
+export function buttons() {
+const btn1 = document.getElementById('newProject');
+btn1.addEventListener('click', () => {
+    let name = prompt('Title:');
+    newProject(name);
+})
+
+const btn2 = document.getElementById('newItem');
+btn2.addEventListener('click', () => {
+    let item = prompt('Name:');
+    let project = prompt('Project');
+    newItem(item, project);
+})
+}
+
+
 
