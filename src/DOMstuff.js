@@ -3,8 +3,6 @@
 
 import toDo, {projects, items} from "./todo";
 
-
-
 export function printProjects(projects) {
     projects.forEach(name => {
         if (document.getElementById(name)=== null) {
@@ -37,14 +35,6 @@ btn1.addEventListener('click', () => {
     populateForm(projects);
 })
 
-// const btn2 = document.getElementById('newItem');
-// btn2.addEventListener('click', () => {
-//     let item = prompt('Name:');
-//     let project = prompt('Project');
-//     newItem(item, project);
-// })
-
-//const projects = [];
 const submit = document.getElementById('submit');
 submit.addEventListener('click', (e) => {
     e.preventDefault();
