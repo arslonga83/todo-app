@@ -9,3 +9,5 @@ export default class toDo {
 }
 
 
+export let projects = ['Default project'];
+export let items = [];

@@ -1,4 +1,7 @@
-import toDo from "./todo";
+//need to separate the todo and project arrays (they have the same name) and make both globally available
+
+
+import toDo, {projects, items} from "./todo";
 
 
 
@@ -26,7 +29,7 @@ export function newItem(item, project) {
 export function buttons() {
 const btn1 = document.getElementById('newProject');
 btn1.addEventListener('click', () => {
-    let projects = ['Default project']
+    
     let title = prompt('Title:');
     projects.push(title);
     console.log(projects);
@@ -40,7 +43,7 @@ btn2.addEventListener('click', () => {
     newItem(item, project);
 })
 
-const projects = [];
+//const projects = [];
 const submit = document.getElementById('submit');
 submit.addEventListener('click', (e) => {
     e.preventDefault();
@@ -53,14 +56,23 @@ submit.addEventListener('click', (e) => {
     //newProject(newTodo.project);
     newItem(newTodo.title, newTodo.project);
     
-    projects.push(newTodo);
+    items.push(newTodo);
     
     console.log(newTodo);
-    console.log(projects);
+    console.log(items);
     
     document.getElementById('form').reset();
 })
 
 }
 
+// export function populateForm (projects){
+//     let select = document.getElementById('test');
+//     for (let i=0; i<projects.length; i++) {
+//         let option = document.createElement('option');
+//         option.textContent = projects[i];
+//         option.value = projects[i];
+//         select.appendChild(option);
+//     }
+// }
 

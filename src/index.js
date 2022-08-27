@@ -1,5 +1,5 @@
-import toDo from "./todo.js";
-import {newItem, newProject, buttons, printProjects} from "./DOMstuff.js";
+import toDo, {projects} from "./todo.js";
+import {newItem, newProject, buttons, printProjects, populateForm} from "./DOMstuff.js";
 
 // function test() {
 //     alert('this is a test');
@@ -22,6 +22,8 @@ import {newItem, newProject, buttons, printProjects} from "./DOMstuff.js";
 
 // newItem('test', 'project');
 
-buttons();
-let projects = ['Default project']
+
+
 printProjects(projects);
+buttons();
+// populateForm(projects);
