@@ -1,3 +1,5 @@
+import toDo from "./todo";
+
 export function newProject(name) {
     const content = document.getElementById('content');
     const project = document.createElement('div');
@@ -16,11 +18,11 @@ export function newItem(item, project) {
     toDo.innerHTML = item;
 } 
 
-
 export function buttons() {
 const btn1 = document.getElementById('newProject');
 btn1.addEventListener('click', () => {
     let name = prompt('Title:');
+
     newProject(name);
 })
 
@@ -30,7 +32,28 @@ btn2.addEventListener('click', () => {
     let project = prompt('Project');
     newItem(item, project);
 })
-}
 
+const projects = [];
+const submit = document.getElementById('submit');
+submit.addEventListener('click', (e) => {
+    e.preventDefault();
+    const newTodo = new toDo();
+    newTodo.project = document.getElementById('project').value;
+    newTodo.title = document.getElementById('title').value;
+    newTodo.description = document.getElementById('description').value;
+    newTodo.dueDate = document.getElementById('dueDate').value;
+    newTodo.priority = document.getElementById('priority').value;
+    //newProject(newTodo.project);
+    newItem(newTodo.title, newTodo.project);
+    
+    projects.push(newTodo);
+    
+    console.log(newTodo);
+    console.log(projects);
+    
+    document.getElementById('form').reset();
+})
+
+}
 
 
