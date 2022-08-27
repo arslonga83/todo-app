@@ -34,6 +34,7 @@ btn1.addEventListener('click', () => {
     projects.push(title);
     console.log(projects);
     printProjects(projects);
+    populateForm(projects);
 })
 
 const btn2 = document.getElementById('newItem');
@@ -66,13 +67,14 @@ submit.addEventListener('click', (e) => {
 
 }
 
-// export function populateForm (projects){
-//     let select = document.getElementById('test');
-//     for (let i=0; i<projects.length; i++) {
-//         let option = document.createElement('option');
-//         option.textContent = projects[i];
-//         option.value = projects[i];
-//         select.appendChild(option);
-//     }
-// }
+export function populateForm(projects){
+    let select = document.getElementById('test');
+    select.innerHTML = '';
+    projects.forEach(project => {
+        let option = document.createElement('option');
+        option.textContent = project;
+        option.value = project;
+        select.appendChild(option);
+    })
+}
 

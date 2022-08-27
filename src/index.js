@@ -26,4 +26,4 @@ import {newItem, newProject, buttons, printProjects, populateForm} from "./DOMst
 
 printProjects(projects);
 buttons();
-// populateForm(projects);
+populateForm(projects);
