@@ -1,6 +1,10 @@
 import toDo from "./todo";
 
-export function newProject(name) {
+
+
+export function printProjects(projects) {
+    projects.forEach(name => {
+        if (document.getElementById(name)=== null) {
     const content = document.getElementById('content');
     const project = document.createElement('div');
     const section = document.createElement('ul');
@@ -9,7 +13,8 @@ export function newProject(name) {
     section.id = name;
     section.appendChild(title);
     project.appendChild(section);
-    content.appendChild(project);
+    content.appendChild(project);}
+})
 }
 
 export function newItem(item, project) {
@@ -21,9 +26,11 @@ export function newItem(item, project) {
 export function buttons() {
 const btn1 = document.getElementById('newProject');
 btn1.addEventListener('click', () => {
-    let name = prompt('Title:');
-
-    newProject(name);
+    let projects = ['Default project']
+    let title = prompt('Title:');
+    projects.push(title);
+    console.log(projects);
+    printProjects(projects);
 })
 
 const btn2 = document.getElementById('newItem');
