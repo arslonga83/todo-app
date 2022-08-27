@@ -37,12 +37,12 @@ btn1.addEventListener('click', () => {
     populateForm(projects);
 })
 
-const btn2 = document.getElementById('newItem');
-btn2.addEventListener('click', () => {
-    let item = prompt('Name:');
-    let project = prompt('Project');
-    newItem(item, project);
-})
+// const btn2 = document.getElementById('newItem');
+// btn2.addEventListener('click', () => {
+//     let item = prompt('Name:');
+//     let project = prompt('Project');
+//     newItem(item, project);
+// })
 
 //const projects = [];
 const submit = document.getElementById('submit');
@@ -68,7 +68,7 @@ submit.addEventListener('click', (e) => {
 }
 
 export function populateForm(projects){
-    let select = document.getElementById('test');
+    let select = document.getElementById('project');
     select.innerHTML = '';
     projects.forEach(project => {
         let option = document.createElement('option');
