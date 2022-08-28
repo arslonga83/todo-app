@@ -93,6 +93,18 @@ clear.addEventListener('click', () => {
 }
 })  
 
+const delproj = document.getElementById('delete');
+delproj.addEventListener('click', () => {
+    let choice = prompt('which project do you want to delete?');
+    for (let i = 0; i < projects.length; i++) {
+        if (projects[i] === choice) {
+            const display = document.getElementById(projects[i]);
+            display.parentElement.remove();
+            projects.splice(i, 1);
+        }
+    }
+})
+
 }
 
 // this adds options to the form dropdown - 1 thing..good?
