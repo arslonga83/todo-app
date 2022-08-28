@@ -1,5 +1,6 @@
 import toDo, {projects, items} from "./todo";
 
+//prints project list to the dom... 1 thing...good?
 export function printProjects(projects) {
     projects.forEach(name => {
         if (document.getElementById(name)=== null) {
@@ -15,7 +16,9 @@ export function printProjects(projects) {
 })
 }
 
+//adds new tasks to the dom along with checkbox...includes checkbox functionality... too much!
 export function newItem(item, project) {
+    if (document.getElementById(item) === null) {
     const section = document.getElementById(project);
     const toDo = section.appendChild(document.createElement('li'));
     const checkBox = document.createElement('input');
@@ -44,8 +47,10 @@ export function newItem(item, project) {
             }
         )
     }
+    }
     
 
+    // contains the listeners for both buttons...including create new todo and clearing the form...too much! or maybe just move this whole thing to todo.js?
 export function buttons() {
 const btn1 = document.getElementById('newProject');
 btn1.addEventListener('click', () => {
@@ -77,8 +82,20 @@ submit.addEventListener('click', (e) => {
     document.getElementById('form').reset();
 })
 
+const clear = document.getElementById('clear');
+clear.addEventListener('click', () => {
+    for (let i = items.length-1; i >= 0; i--) {
+        if (items[i].complete === true) {
+            let display = document.getElementById(items[i].title);
+            display.parentElement.remove();
+            items.splice(i, 1);
+    }
+}
+})  
+
 }
 
+// this adds options to the form dropdown - 1 thing..good?
 export function populateForm(projects){
     let select = document.getElementById('project');
     select.innerHTML = '';
@@ -90,3 +107,15 @@ export function populateForm(projects){
     })
 }
 
+// something like this for when I add storage?
+// export function redraw() {
+//     printProjects(projects);
+//     items.forEach(item => {
+//         newItem(item, item.project);
+//     })
+// }
+
+    
+        
+          
+      
