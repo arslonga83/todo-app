@@ -26,11 +26,21 @@ export function newItem(item, project) {
     checkBox.id = item;
     checkBox.name = item;
     toDo.appendChild(checkBox);
-    toDo.appendChild(document.createTextNode(item));
-    checkBox.appendChild(label);
+    let text = document.createTextNode(item)
+    toDo.appendChild(text);
+    checkBox.addEventListener('change', () => {
+        
+        for (let i = 0; i < items.length; i++) {
+            if (items[i].title === item) {
+                items[i].complete = true;
+                console.log(items);
+                toDo.style.textDecoration = 'line-through';
+                }
+            }
+            }
+        )
+    }
     
-    
-} 
 
 export function buttons() {
 const btn1 = document.getElementById('newProject');
@@ -52,7 +62,7 @@ submit.addEventListener('click', (e) => {
     newTodo.description = document.getElementById('description').value;
     newTodo.dueDate = document.getElementById('dueDate').value;
     newTodo.priority = document.getElementById('priority').value;
-    //newProject(newTodo.project);
+    newTodo.complete = false;
     newItem(newTodo.title, newTodo.project);
     
     items.push(newTodo);
