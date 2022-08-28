@@ -1,6 +1,3 @@
-//need to separate the todo and project arrays (they have the same name) and make both globally available
-
-
 import toDo, {projects, items} from "./todo";
 
 export function printProjects(projects) {
@@ -32,10 +29,17 @@ export function newItem(item, project) {
         
         for (let i = 0; i < items.length; i++) {
             if (items[i].title === item) {
+                if (checkBox.checked) {
                 items[i].complete = true;
                 console.log(items);
                 toDo.style.textDecoration = 'line-through';
                 }
+                if (checkBox.checked === false) {
+                    items[i].complete = false;
+                    console.log(items);
+                    toDo.style.textDecoration = 'none';
+                }
+            }
             }
             }
         )
