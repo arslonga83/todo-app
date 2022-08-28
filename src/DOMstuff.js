@@ -21,7 +21,15 @@ export function printProjects(projects) {
 export function newItem(item, project) {
     const section = document.getElementById(project);
     const toDo = section.appendChild(document.createElement('li'));
-    toDo.innerHTML = item;
+    const checkBox = document.createElement('input');
+    checkBox.type = 'checkbox';
+    checkBox.id = item;
+    checkBox.name = item;
+    toDo.appendChild(checkBox);
+    toDo.appendChild(document.createTextNode(item));
+    checkBox.appendChild(label);
+    
+    
 } 
 
 export function buttons() {
