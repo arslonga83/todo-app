@@ -136,6 +136,7 @@ delproj.addEventListener('click', () => {
             projects.splice(i, 1);
         }
     }
+    populateForm(projects);
 })
 
 }
