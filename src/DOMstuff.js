@@ -41,6 +41,7 @@ export function newItem(item, project) {
             console.log(item.title);
             if (text.textContent === item.title) {
                 alert(`Title: ${item.title} \n Description: ${item.description} \n Due: ${item.dueDate} \n Priority: ${item.priority}`);
+                popupDetails(item);
             }
         })
     })
@@ -83,7 +84,7 @@ export function newItem(item, project) {
     }
     
 
-    // contains the listeners for both buttons...including create new todo and clearing the form...too much! or maybe just move this whole thing to todo.js?
+    // contains the listeners for all buttons...including create new todo and clearing the form...too much! or maybe just move this whole thing to todo.js?
 export function buttons() {
 const btn1 = document.getElementById('newProject');
 btn1.addEventListener('click', () => {
@@ -153,6 +154,22 @@ export function populateForm(projects){
         option.value = project;
         select.appendChild(option);
     })
+}
+
+function popupDetails(item) {
+    const content = document.getElementById('content');
+    const popup = document.createElement('div');
+    let details = popup.appendChild(document.createElement('p'));
+    details.textContent = `Title: ${item.title} \n Description: ${item.description} \n Due: ${item.dueDate} \n Priority: ${item.priority}`;
+    popup.id = 'popup';
+    content.appendChild(popup);
+    const close = popup.appendChild(document.createElement('button'));
+    close.textContent = 'x';
+    close.addEventListener('click', () => {
+        popup.remove();
+    })
+
+    
 }
 
 

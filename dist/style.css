@@ -17,8 +17,8 @@ button {
 }
 h1 {
     text-align: center;
-    font-size: 48px;
-    margin: 8px;
+    font-size: 56px;
+    margin: 24px;
 }
 
 h2 {
@@ -28,16 +28,20 @@ h2 {
 #main {
     display: grid;
     grid-template-columns: 1fr 2fr;
+    
 }
 
 #sidebar {
     background-color: slategray;
     padding: 16px;
     margin: 16px;
+   
 }
 
 #content {
     padding-top: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 }
 
 ul {
@@ -65,3 +69,14 @@ button.more, button.dlt {
     align-self: center;
     
 }
+
+#popup {
+    background-color: white;
+    border: 2px solid black;
+    display: grid;
+    position: absolute;
+    white-space: pre;
+    padding: 8px;
+}
+
+
