@@ -1,3 +1,67 @@
+* {
+    padding: 0; 
+    margin: 0;
+}
+
 body {
-    background-color: green;
+    
+    background-color: lightblue;
+    padding: 8px;
+    display: grid;
+    justify-content: center;
+
+}
+
+button {
+    padding: 4px;
+}
+h1 {
+    text-align: center;
+    font-size: 48px;
+    margin: 8px;
+}
+
+h2 {
+    margin: 8px;;
+}
+
+#main {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+}
+
+#sidebar {
+    background-color: slategray;
+    padding: 16px;
+    margin: 16px;
+}
+
+#content {
+    padding-top: 0;
+}
+
+ul {
+    padding-top: 0;
+    
+}
+
+form {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+li {
+    display: flex;
+    gap: 4px;
+    padding: 8px;
+    align-items: center;
+}
+
+button.more, button.dlt {
+    height: fit-content;
+    display: grid;
+    align-self: center;
+    
 }
