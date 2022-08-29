@@ -28,6 +28,22 @@ export function newItem(item, project) {
     toDo.appendChild(checkBox);
     let text = document.createTextNode(item)
     toDo.appendChild(text);
+
+    //add delete button
+    let dlt = document.createElement('button');
+    dlt.classList.add('dlt');
+    dlt.textContent = 'X';
+    toDo.appendChild(dlt);
+    dlt.addEventListener('click', () => {
+        for (let i = 0; i < items.length; i++) {
+            if (items[i].title + 'X' === dlt.parentElement.textContent) {
+                items.splice(i, 1);
+            }
+        }
+        dlt.parentElement.remove();
+    });
+
+    //listeners for checkbox
     checkBox.addEventListener('change', () => {
         
         for (let i = 0; i < items.length; i++) {
@@ -107,6 +123,8 @@ delproj.addEventListener('click', () => {
 
 }
 
+
+
 // this adds options to the form dropdown - 1 thing..good?
 export function populateForm(projects){
     let select = document.getElementById('project');
@@ -119,6 +137,8 @@ export function populateForm(projects){
     })
 }
 
+
+
 // something like this for when I add storage?
 // export function redraw() {
 //     printProjects(projects);
@@ -126,6 +146,7 @@ export function populateForm(projects){
 //         newItem(item, item.project);
 //     })
 // }
+
 
     
         

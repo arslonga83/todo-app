@@ -3,6 +3,7 @@
 //divide up some functions that are doing too many things....divide between dom and data
 //add style!
 //research, add date library 
+//add storage/memory
 
 
 
