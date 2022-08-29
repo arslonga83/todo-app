@@ -29,6 +29,22 @@ export function newItem(item, project) {
     let text = document.createTextNode(item)
     toDo.appendChild(text);
 
+    //add more details button
+    let more = document.createElement('button');
+    more.classList.add('more');
+    more.textContent = 'more';
+    toDo.appendChild(more);
+    console.log(toDo.innerText);
+    more.addEventListener('click', () => {
+        items.forEach(item => {
+            console.log(item.title);
+            if (toDo.textContent === item.title + 'moreX') {
+                alert(`Title: ${item.title} \n Description: ${item.description} \n Due: ${item.dueDate} \n Priority: ${item.priority}`);
+            }
+        })
+    })
+
+
     //add delete button
     let dlt = document.createElement('button');
     dlt.classList.add('dlt');
