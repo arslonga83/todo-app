@@ -26,7 +26,8 @@ export function newItem(item, project) {
     checkBox.id = item;
     checkBox.name = item;
     toDo.appendChild(checkBox);
-    let text = document.createTextNode(item)
+    let text = document.createElement('p');
+    text.innerHTML = item;
     toDo.appendChild(text);
 
     //add more details button
@@ -38,7 +39,7 @@ export function newItem(item, project) {
     more.addEventListener('click', () => {
         items.forEach(item => {
             console.log(item.title);
-            if (toDo.textContent === item.title + 'moreX') {
+            if (text.textContent === item.title) {
                 alert(`Title: ${item.title} \n Description: ${item.description} \n Due: ${item.dueDate} \n Priority: ${item.priority}`);
             }
         })
@@ -67,12 +68,12 @@ export function newItem(item, project) {
                 if (checkBox.checked) {
                 items[i].complete = true;
                 console.log(items);
-                toDo.style.textDecoration = 'line-through';
+                text.style.textDecoration = 'line-through';
                 }
                 if (checkBox.checked === false) {
                     items[i].complete = false;
                     console.log(items);
-                    toDo.style.textDecoration = 'none';
+                    text.style.textDecoration = 'none';
                 }
             }
             }

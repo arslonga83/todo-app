@@ -9,8 +9,9 @@
     <script src="./main.js" defer></script>
 </head>
 <body>
-    <div id='content'>
-        <h1>My To-Do List</h1>
+    <h1>My To-Do List</h1>
+    <div id="main">
+        <div id="sidebar">
         <button id="newProject">New Project</button>
         <button id="clear">Clear Completed</button>
         <button id="delete">Delete Project</button>
@@ -27,6 +28,10 @@
             <input type="text" id="priority" name="priority">
             <button type="submit" id="submit">Submit</button>
         </form>
-    </div> 
+        </div>
+
+        <div id='content'></div>
+    </div>
+    
 </body>
 </html>
