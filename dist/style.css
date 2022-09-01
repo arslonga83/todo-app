@@ -4,17 +4,16 @@
 }
 
 body {
-    
     background-color: lightblue;
     padding: 8px;
     display: grid;
     justify-content: center;
-
 }
 
 button {
     padding: 4px;
 }
+
 h1 {
     text-align: center;
     font-size: 56px;
@@ -67,7 +66,6 @@ button.more, button.dlt {
     height: fit-content;
     display: grid;
     align-self: center;
-    
 }
 
 #popup {

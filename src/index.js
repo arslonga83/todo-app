@@ -8,8 +8,10 @@
 
 
 import toDo, {projects} from "./todo.js";
-import {newItem, newProject, buttons, printProjects, populateForm} from "./DOMstuff.js";
+import {newItem, newProject, buttons, printProjects, populateForm, redraw} from "./DOMstuff.js";
 
+redraw();
 printProjects(projects);
 buttons();
 populateForm(projects);
+

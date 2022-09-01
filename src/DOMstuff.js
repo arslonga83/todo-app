@@ -40,7 +40,6 @@ export function newItem(item, project) {
         items.forEach(item => {
             console.log(item.title);
             if (text.textContent === item.title) {
-                alert(`Title: ${item.title} \n Description: ${item.description} \n Due: ${item.dueDate} \n Priority: ${item.priority}`);
                 popupDetails(item);
             }
         })
@@ -92,6 +91,8 @@ btn1.addEventListener('click', () => {
     let title = prompt('Title:');
     projects.push(title);
     console.log(projects);
+    localStorage.setItem("projects", JSON.stringify(projects));
+    console.log(JSON.parse(localStorage.getItem("projects")));
     printProjects(projects);
     populateForm(projects);
 })
@@ -109,6 +110,9 @@ submit.addEventListener('click', (e) => {
     newItem(newTodo.title, newTodo.project);
     
     items.push(newTodo);
+    localStorage.setItem("items", JSON.stringify(items));
+    console.log(localStorage);
+    console.log(JSON.parse(localStorage.getItem("items")));
     
     console.log(newTodo);
     console.log(items);
@@ -137,7 +141,9 @@ delproj.addEventListener('click', () => {
             projects.splice(i, 1);
         }
     }
+    localStorage.setItem("projects", JSON.stringify(projects));
     populateForm(projects);
+
 })
 
 }
@@ -164,23 +170,25 @@ function popupDetails(item) {
     popup.id = 'popup';
     content.appendChild(popup);
     const close = popup.appendChild(document.createElement('button'));
-    close.textContent = 'x';
+    close.textContent = 'close popup';
     close.addEventListener('click', () => {
         popup.remove();
     })
-
-    
 }
 
 
-
-// something like this for when I add storage?
-// export function redraw() {
-//     printProjects(projects);
-//     items.forEach(item => {
-//         newItem(item, item.project);
-//     })
-// }
+  export function redraw() {
+    window.onload = (event) => {
+        projects = JSON.parse(localStorage.getItem("projects"));
+        printProjects(projects);
+    }   
+}
+//     projects = JSON.parse(localStorage.getItem("projects"))
+//      printProjects(projects);
+//      //items.forEach(item => {
+//        //  newItem(item, item.project);
+//     // })
+//  }
 
 
     
