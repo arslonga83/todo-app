@@ -58,6 +58,7 @@ export function newItem(item, project) {
             }
         }
         dlt.parentElement.remove();
+        //localStorage.setItem("items", JSON.stringify(items));
     });
 
     //listeners for checkbox
@@ -80,6 +81,7 @@ export function newItem(item, project) {
             }
         )
     }
+    //localStorage.setItem("items", JSON.stringify(items));
     }
     
 
@@ -110,9 +112,9 @@ submit.addEventListener('click', (e) => {
     newItem(newTodo.title, newTodo.project);
     
     items.push(newTodo);
-    localStorage.setItem("items", JSON.stringify(items));
+   // localStorage.setItem("items", JSON.stringify(items));
     console.log(localStorage);
-    console.log(JSON.parse(localStorage.getItem("items")));
+    //console.log(JSON.parse(localStorage.getItem("items")));
     
     console.log(newTodo);
     console.log(items);
@@ -127,6 +129,7 @@ clear.addEventListener('click', () => {
             let display = document.getElementById(items[i].title);
             display.parentElement.remove();
             items.splice(i, 1);
+            //localStorage.setItem("items", JSON.stringify(items));
     }
 }
 })  
@@ -177,18 +180,25 @@ function popupDetails(item) {
 }
 
 
-  export function redraw() {
-    window.onload = (event) => {
-        projects = JSON.parse(localStorage.getItem("projects"));
-        printProjects(projects);
-    }   
-}
-//     projects = JSON.parse(localStorage.getItem("projects"))
-//      printProjects(projects);
-//      //items.forEach(item => {
-//        //  newItem(item, item.project);
-//     // })
-//  }
+////i think the projects storage is working....need to add the items
+
+   export function redraw() {
+      window.onload = (event) => {
+        if(localStorage.getItem('projects')) {
+          projects = JSON.parse(localStorage.getItem("projects"));
+          printProjects(projects);
+        }
+
+//         // console.log(JSON.parse(localStorage.getItem("items")))
+//         // items = JSON.parse(localStorage.getItem("items"));
+//         // console.log(items);
+//         // for (let i = 0; i < items.length; i++) {
+//         //     newItem(items[i], items[i].project);
+//         // }
+
+     }   
+ }
+
 
 
     
