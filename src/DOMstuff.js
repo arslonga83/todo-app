@@ -17,7 +17,7 @@ export function printProjects(projects) {
 }
 
 //adds new tasks to the dom along with checkbox...includes checkbox functionality... too much!
-export function newItem(item, project) {
+export function newItem(item, project, status=false) {
     if (document.getElementById(item) === null) {
     const section = document.getElementById(project);
     const toDo = section.appendChild(document.createElement('li'));
@@ -25,9 +25,13 @@ export function newItem(item, project) {
     checkBox.type = 'checkbox';
     checkBox.id = item;
     checkBox.name = item;
+    checkBox.checked = status;
     toDo.appendChild(checkBox);
     let text = document.createElement('p');
     text.innerHTML = item;
+    if (checkBox.checked) {
+        text.style.textDecoration = 'line-through';
+    }
     toDo.appendChild(text);
 
     //add more details button
@@ -191,8 +195,6 @@ function popupDetails(item) {
 }
 
 
-////i think the projects storage is working....need to add the items
-
    export function redraw() {
       window.onload = (event) => {
         if(localStorage.getItem('projects')) {
@@ -203,18 +205,10 @@ function popupDetails(item) {
         if(localStorage.getItem('items')) {
             items = JSON.parse(localStorage.getItem('items'));
             items.forEach(item => {
-                newItem(item.title, item.project);
+                newItem(item.title, item.project, item.complete);
             })
             console.log(items);
         }
-
-//         // console.log(JSON.parse(localStorage.getItem("items")))
-//         // items = JSON.parse(localStorage.getItem("items"));
-//         // console.log(items);
-//         // for (let i = 0; i < items.length; i++) {
-//         //     newItem(items[i], items[i].project);
-//         // }
-
      }   
  }
 
