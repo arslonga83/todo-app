@@ -52,13 +52,20 @@ export function newItem(item, project) {
     dlt.textContent = 'X';
     toDo.appendChild(dlt);
     dlt.addEventListener('click', () => {
+       
         for (let i = 0; i < items.length; i++) {
-            if (items[i].title + 'X' === dlt.parentElement.textContent) {
+            console.log(items[i].title + 'moreX');
+            console.log(dlt.parentElement.textContent);
+            if (items[i].title + 'moreX' === dlt.parentElement.textContent) {
+                
                 items.splice(i, 1);
             }
         }
+        localStorage.setItem("items", JSON.stringify(items));
+        console.log(JSON.parse(localStorage.getItem('items')));
+        console.log(items);
         dlt.parentElement.remove();
-        //localStorage.setItem("items", JSON.stringify(items));
+        
     });
 
     //listeners for checkbox
@@ -68,20 +75,24 @@ export function newItem(item, project) {
             if (items[i].title === item) {
                 if (checkBox.checked) {
                 items[i].complete = true;
+                localStorage.setItem("items", JSON.stringify(items));
                 console.log(items);
+                console.log(JSON.parse(localStorage.getItem('items')));
                 text.style.textDecoration = 'line-through';
                 }
                 if (checkBox.checked === false) {
                     items[i].complete = false;
+                    localStorage.setItem("items", JSON.stringify(items));
                     console.log(items);
+                    console.log(items[i].complete);
                     text.style.textDecoration = 'none';
                 }
             }
             }
+            
             }
         )
     }
-    //localStorage.setItem("items", JSON.stringify(items));
     }
     
 
@@ -112,9 +123,9 @@ submit.addEventListener('click', (e) => {
     newItem(newTodo.title, newTodo.project);
     
     items.push(newTodo);
-   // localStorage.setItem("items", JSON.stringify(items));
+    localStorage.setItem("items", JSON.stringify(items));
     console.log(localStorage);
-    //console.log(JSON.parse(localStorage.getItem("items")));
+    console.log(JSON.parse(localStorage.getItem("items")));
     
     console.log(newTodo);
     console.log(items);
@@ -129,7 +140,7 @@ clear.addEventListener('click', () => {
             let display = document.getElementById(items[i].title);
             display.parentElement.remove();
             items.splice(i, 1);
-            //localStorage.setItem("items", JSON.stringify(items));
+            localStorage.setItem("items", JSON.stringify(items));
     }
 }
 })  
@@ -187,6 +198,14 @@ function popupDetails(item) {
         if(localStorage.getItem('projects')) {
           projects = JSON.parse(localStorage.getItem("projects"));
           printProjects(projects);
+          populateForm(projects);
+        }
+        if(localStorage.getItem('items')) {
+            items = JSON.parse(localStorage.getItem('items'));
+            items.forEach(item => {
+                newItem(item.title, item.project);
+            })
+            console.log(items);
         }
 
 //         // console.log(JSON.parse(localStorage.getItem("items")))
