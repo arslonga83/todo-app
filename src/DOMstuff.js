@@ -118,7 +118,9 @@ submit.addEventListener('click', (e) => {
     newTodo.project = document.getElementById('project').value;
     newTodo.title = document.getElementById('title').value;
     newTodo.description = document.getElementById('description').value;
-    newTodo.dueDate = format(parseISO(document.getElementById('dueDate').value), 'PPPP'); 
+    if (document.getElementById('dueDate').value) {
+        newTodo.dueDate = format(parseISO(document.getElementById('dueDate').value), 'PPPP'); 
+    }
     newTodo.priority = document.getElementById('priority').value;
     newTodo.complete = false;
     newItem(newTodo.title, newTodo.project);
