@@ -152,16 +152,17 @@ clear.addEventListener('click', () => {
 
 const delproj = document.getElementById('delete');
 delproj.addEventListener('click', () => {
-    let choice = prompt('which project do you want to delete?');
-    for (let i = 0; i < projects.length; i++) {
-        if (projects[i] === choice) {
-            const display = document.getElementById(projects[i]);
-            display.parentElement.remove();
-            projects.splice(i, 1);
-        }
-    }
-    localStorage.setItem("projects", JSON.stringify(projects));
-    populateForm(projects);
+    delProjPopup();
+    //let choice = prompt('which project do you want to delete?');
+    // for (let i = 0; i < projects.length; i++) {
+    //     if (projects[i] === choice) {
+    //         const display = document.getElementById(projects[i]);
+    //         display.parentElement.remove();
+    //         projects.splice(i, 1);
+    //     }
+    // }
+    // localStorage.setItem("projects", JSON.stringify(projects));
+    // populateForm(projects);
 
 })
 }
@@ -178,7 +179,7 @@ export function populateForm(projects){
     })
 }
 
-//popup from details button
+//popup form details button
 function popupDetails(item) {
     const content = document.getElementById('content');
     const popup = document.createElement('div');
@@ -193,7 +194,7 @@ function popupDetails(item) {
     })
 };
 
-//new function for new project
+//new function for new project popup
 function newProjPopup() {
     const projPopup = document.createElement('div');
     projPopup.textContent = 'Project Name:';
@@ -213,15 +214,53 @@ function newProjPopup() {
         e.preventDefault;
         projPopup.remove();
         console.log(input.value);
-        //return input.value;
         projects.push(input.value);
-    console.log(projects);
-    localStorage.setItem("projects", JSON.stringify(projects));
-    console.log(JSON.parse(localStorage.getItem("projects")));
-    printProjects(projects);
-    populateForm(projects);
+        console.log(projects);
+        localStorage.setItem("projects", JSON.stringify(projects));
+        console.log(JSON.parse(localStorage.getItem("projects")));
+        printProjects(projects);
+        populateForm(projects);
     })
 }
+
+//new function for delete projects popup
+function delProjPopup() {
+    const delProjPopup = document.createElement('div');
+    delProjPopup.textContent = 'Which project do you want to delete?';
+    let dropdown = document.createElement('select');
+    delProjPopup.appendChild(dropdown);
+    delProjPopup.id = 'delProjPopup';
+    content.appendChild(delProjPopup);
+    const close = delProjPopup.appendChild(document.createElement('button'));
+    close.textContent = 'close popup';
+    close.addEventListener('click', () => {
+        delProjPopup.remove();
+})
+    projects.forEach(project => {
+        let option = document.createElement('option');
+        option.textContent = project;
+        option.value = project;
+        dropdown.appendChild(option);
+})
+const submitDel = delProjPopup.appendChild(document.createElement('button'));
+    submitDel.textContent = 'Submit';
+    submitDel.addEventListener('click', (e) => {
+        e.preventDefault;
+        delProjPopup.remove();
+        let choice = dropdown.value;
+        for (let i = 0; i < projects.length; i++) {
+            if (projects[i] === choice) {
+                const display = document.getElementById(projects[i]);
+                display.parentElement.remove();
+                projects.splice(i, 1);
+            }
+        }
+        localStorage.setItem("projects", JSON.stringify(projects));
+        populateForm(projects);
+    }); 
+
+
+};
 
 //call local storage on page refresh
    export function redraw() {

@@ -86,7 +86,7 @@ button.more, button.dlt {
     align-self: center;
 }
 
-#popup, #projPopup {
+#popup, #projPopup, #delProjPopup {
     background-image: linear-gradient(to bottom right, lightblue, slategray);
     border: 2px solid black;
     display: grid;
