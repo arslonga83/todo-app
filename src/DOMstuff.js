@@ -102,13 +102,15 @@ export function buttons() {
 const btn1 = document.getElementById('newProject');
 btn1.addEventListener('click', () => {
     
-    let title = prompt('Title:');
-    projects.push(title);
-    console.log(projects);
-    localStorage.setItem("projects", JSON.stringify(projects));
-    console.log(JSON.parse(localStorage.getItem("projects")));
-    printProjects(projects);
-    populateForm(projects);
+    newProjPopup();
+    // console.log(title);
+    // //let title = prompt('Title:');
+    // projects.push(title);
+    // console.log(projects);
+    // localStorage.setItem("projects", JSON.stringify(projects));
+    // console.log(JSON.parse(localStorage.getItem("projects")));
+    // printProjects(projects);
+    // populateForm(projects);
 })
 
 const submit = document.getElementById('submit');
@@ -188,6 +190,36 @@ function popupDetails(item) {
     close.textContent = 'close popup';
     close.addEventListener('click', () => {
         popup.remove();
+    })
+};
+
+//new function for new project
+function newProjPopup() {
+    const projPopup = document.createElement('div');
+    projPopup.textContent = 'Project Name:';
+    let input = document.createElement('input');
+    input.type = 'text';
+    projPopup.appendChild(input);
+    projPopup.id = 'projPopup';
+    content.appendChild(projPopup);
+    const close = projPopup.appendChild(document.createElement('button'));
+    close.textContent = 'close popup';
+    close.addEventListener('click', () => {
+        projPopup.remove();
+})
+    const submitNew = projPopup.appendChild(document.createElement('button'));
+    submitNew.textContent = 'Submit';
+    submitNew.addEventListener('click', (e) => {
+        e.preventDefault;
+        projPopup.remove();
+        console.log(input.value);
+        //return input.value;
+        projects.push(input.value);
+    console.log(projects);
+    localStorage.setItem("projects", JSON.stringify(projects));
+    console.log(JSON.parse(localStorage.getItem("projects")));
+    printProjects(projects);
+    populateForm(projects);
     })
 }
 
