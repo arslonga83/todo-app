@@ -1,9 +1,12 @@
 //things to do....
-//add a clear function that removes crossed off items/projects
 //divide up some functions that are doing too many things....divide between dom and data
 //add style!
 //research, add date library 
-//add storage/memory
+//add example text in form...dropdown for priority?
+//add colors for priority?
+
+//what's up the the ghost 'new project' that seems stuck?!
+
 
 
 
