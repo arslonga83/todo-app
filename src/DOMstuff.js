@@ -1,4 +1,5 @@
 import toDo, {projects, items} from "./todo";
+import {format, parseISO} from 'date-fns';
 
 //prints project list to the dom... 1 thing...good?
 export function printProjects(projects) {
@@ -49,7 +50,6 @@ export function newItem(item, project, status=false) {
         })
     })
 
-
     //add delete button
     let dlt = document.createElement('button');
     dlt.classList.add('dlt');
@@ -74,7 +74,6 @@ export function newItem(item, project, status=false) {
 
     //listeners for checkbox
     checkBox.addEventListener('change', () => {
-        
         for (let i = 0; i < items.length; i++) {
             if (items[i].title === item) {
                 if (checkBox.checked) {
@@ -93,12 +92,10 @@ export function newItem(item, project, status=false) {
                 }
             }
             }
-            
             }
         )
     }
     }
-    
 
     // contains the listeners for all buttons...including create new todo and clearing the form...too much! or maybe just move this whole thing to todo.js?
 export function buttons() {
@@ -121,7 +118,7 @@ submit.addEventListener('click', (e) => {
     newTodo.project = document.getElementById('project').value;
     newTodo.title = document.getElementById('title').value;
     newTodo.description = document.getElementById('description').value;
-    newTodo.dueDate = document.getElementById('dueDate').value;
+    newTodo.dueDate = format(parseISO(document.getElementById('dueDate').value), 'PPPP'); 
     newTodo.priority = document.getElementById('priority').value;
     newTodo.complete = false;
     newItem(newTodo.title, newTodo.project);
@@ -163,10 +160,7 @@ delproj.addEventListener('click', () => {
     populateForm(projects);
 
 })
-
 }
-
-
 
 // this adds options to the form dropdown - 1 thing..good?
 export function populateForm(projects){
@@ -180,6 +174,7 @@ export function populateForm(projects){
     })
 }
 
+//popup from details button
 function popupDetails(item) {
     const content = document.getElementById('content');
     const popup = document.createElement('div');
@@ -194,7 +189,7 @@ function popupDetails(item) {
     })
 }
 
-
+//call local storage on page refresh
    export function redraw() {
       window.onload = (event) => {
         if(localStorage.getItem('projects')) {

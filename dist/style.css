@@ -3,15 +3,23 @@
     margin: 0;
 }
 
+@font-face {
+    font-family: openSans;
+    src: url(./OpenSans-VariableFont_wdth\,wght.ttf);
+}
+
 body {
     background-color: lightblue;
     padding: 8px;
     display: grid;
     justify-content: center;
+    font-family: openSans, sans-serif;
 }
 
 button {
     padding: 4px;
+    margin: 4px;
+    font-family: inherit;
 }
 
 h1 {
@@ -27,14 +35,12 @@ h2 {
 #main {
     display: grid;
     grid-template-columns: 1fr 2fr;
-    
 }
 
 #sidebar {
     background-color: slategray;
     padding: 16px;
     margin: 16px;
-   
 }
 
 #content {
@@ -53,6 +59,12 @@ form {
     grid-template-columns: 1fr 2fr;
     gap: 8px;
     margin-top: 8px;
+    font-family: inherit;
+}
+
+input, select {
+    font-family: inherit;
+    margin: 4px;
 }
 
 li {
@@ -74,6 +86,7 @@ button.more, button.dlt {
     display: grid;
     position: absolute;
     white-space: pre;
+    line-height: 2;
     padding: 8px;
 }
 
