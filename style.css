@@ -20,6 +20,7 @@ button {
     padding: 4px;
     margin: 4px;
     font-family: inherit;
+    font-weight: bolder;
 }
 
 h1 {
@@ -85,7 +86,7 @@ button.more, button.dlt {
     align-self: center;
 }
 
-#popup {
+#popup, #projPopup {
     background-image: linear-gradient(to bottom right, lightblue, slategray);
     border: 2px solid black;
     display: grid;
