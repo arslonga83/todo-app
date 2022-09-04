@@ -1,7 +1,6 @@
-import toDo, {projects, items} from "./todo";
-import {format, parseISO} from 'date-fns';
+import {projects, items, createNewTodo, createProject, deleteProject, deleteTodo} from "./todo";
 
-//prints project list to the dom... 1 thing...good?
+//prints project list to the dom
 export function printProjects(projects) {
     projects.forEach(name => {
         if (document.getElementById(name)=== null) {
@@ -17,11 +16,13 @@ export function printProjects(projects) {
 })
 }
 
-//adds new tasks to the dom along with checkbox...includes checkbox functionality... too much!
+//adds new tasks to the dom along with checkbox, more button, delete button
 export function newItem(item, project, status=false) {
     if (document.getElementById(item) === null) {
     const section = document.getElementById(project);
     const toDo = section.appendChild(document.createElement('li'));
+
+    //add checkbox
     const checkBox = document.createElement('input');
     checkBox.type = 'checkbox';
     checkBox.id = item;
@@ -40,10 +41,8 @@ export function newItem(item, project, status=false) {
     more.classList.add('more');
     more.textContent = 'more';
     toDo.appendChild(more);
-    console.log(toDo.innerText);
     more.addEventListener('click', () => {
         items.forEach(item => {
-            console.log(item.title);
             if (text.textContent === item.title) {
                 popupDetails(item);
             }
@@ -56,20 +55,8 @@ export function newItem(item, project, status=false) {
     dlt.textContent = 'X';
     toDo.appendChild(dlt);
     dlt.addEventListener('click', () => {
-       
-        for (let i = 0; i < items.length; i++) {
-            console.log(items[i].title + 'moreX');
-            console.log(dlt.parentElement.textContent);
-            if (items[i].title + 'moreX' === dlt.parentElement.textContent) {
-                
-                items.splice(i, 1);
-            }
-        }
-        localStorage.setItem("items", JSON.stringify(items));
-        console.log(JSON.parse(localStorage.getItem('items')));
-        console.log(items);
+        deleteTodo(dlt);
         dlt.parentElement.remove();
-        
     });
 
     //listeners for checkbox
@@ -80,14 +67,12 @@ export function newItem(item, project, status=false) {
                 items[i].complete = true;
                 localStorage.setItem("items", JSON.stringify(items));
                 console.log(items);
-                console.log(JSON.parse(localStorage.getItem('items')));
                 text.style.textDecoration = 'line-through';
                 }
                 if (checkBox.checked === false) {
                     items[i].complete = false;
                     localStorage.setItem("items", JSON.stringify(items));
                     console.log(items);
-                    console.log(items[i].complete);
                     text.style.textDecoration = 'none';
                 }
             }
@@ -97,47 +82,24 @@ export function newItem(item, project, status=false) {
     }
     }
 
-    // contains the listeners for all buttons...including create new todo and clearing the form...too much! or maybe just move this whole thing to todo.js?
+// contains the listeners for all buttons
 export function buttons() {
+
+//new project button
 const btn1 = document.getElementById('newProject');
 btn1.addEventListener('click', () => {
-    
     newProjPopup();
-    // console.log(title);
-    // //let title = prompt('Title:');
-    // projects.push(title);
-    // console.log(projects);
-    // localStorage.setItem("projects", JSON.stringify(projects));
-    // console.log(JSON.parse(localStorage.getItem("projects")));
-    // printProjects(projects);
-    // populateForm(projects);
-})
+});
 
+//submit button
 const submit = document.getElementById('submit');
 submit.addEventListener('click', (e) => {
     e.preventDefault();
-    const newTodo = new toDo();
-    newTodo.project = document.getElementById('project').value;
-    newTodo.title = document.getElementById('title').value;
-    newTodo.description = document.getElementById('description').value;
-    if (document.getElementById('dueDate').value) {
-        newTodo.dueDate = format(parseISO(document.getElementById('dueDate').value), 'PPPP'); 
-    }
-    newTodo.priority = document.getElementById('priority').value;
-    newTodo.complete = false;
-    newItem(newTodo.title, newTodo.project);
-    
-    items.push(newTodo);
-    localStorage.setItem("items", JSON.stringify(items));
-    console.log(localStorage);
-    console.log(JSON.parse(localStorage.getItem("items")));
-    
-    console.log(newTodo);
-    console.log(items);
-    
+    createNewTodo()
     document.getElementById('form').reset();
-})
+});
 
+//clear button
 const clear = document.getElementById('clear');
 clear.addEventListener('click', () => {
     for (let i = items.length-1; i >= 0; i--) {
@@ -148,26 +110,16 @@ clear.addEventListener('click', () => {
             localStorage.setItem("items", JSON.stringify(items));
     }
 }
-})  
+});
 
+//delete project button
 const delproj = document.getElementById('delete');
 delproj.addEventListener('click', () => {
     delProjPopup();
-    //let choice = prompt('which project do you want to delete?');
-    // for (let i = 0; i < projects.length; i++) {
-    //     if (projects[i] === choice) {
-    //         const display = document.getElementById(projects[i]);
-    //         display.parentElement.remove();
-    //         projects.splice(i, 1);
-    //     }
-    // }
-    // localStorage.setItem("projects", JSON.stringify(projects));
-    // populateForm(projects);
-
 })
 }
 
-// this adds options to the form dropdown - 1 thing..good?
+// this adds options to the form dropdown
 export function populateForm(projects){
     let select = document.getElementById('project');
     select.innerHTML = '';
@@ -177,7 +129,7 @@ export function populateForm(projects){
         option.value = project;
         select.appendChild(option);
     })
-}
+};
 
 //popup form details button
 function popupDetails(item) {
@@ -194,7 +146,7 @@ function popupDetails(item) {
     })
 };
 
-//new function for new project popup
+//new project popup
 function newProjPopup() {
     const projPopup = document.createElement('div');
     projPopup.textContent = 'Project Name:';
@@ -213,17 +165,11 @@ function newProjPopup() {
     submitNew.addEventListener('click', (e) => {
         e.preventDefault;
         projPopup.remove();
-        console.log(input.value);
-        projects.push(input.value);
-        console.log(projects);
-        localStorage.setItem("projects", JSON.stringify(projects));
-        console.log(JSON.parse(localStorage.getItem("projects")));
-        printProjects(projects);
-        populateForm(projects);
+        createProject(input.value);
     })
 }
 
-//new function for delete projects popup
+//delete projects popup
 function delProjPopup() {
     const delProjPopup = document.createElement('div');
     delProjPopup.textContent = 'Which project do you want to delete?';
@@ -247,19 +193,8 @@ const submitDel = delProjPopup.appendChild(document.createElement('button'));
     submitDel.addEventListener('click', (e) => {
         e.preventDefault;
         delProjPopup.remove();
-        let choice = dropdown.value;
-        for (let i = 0; i < projects.length; i++) {
-            if (projects[i] === choice) {
-                const display = document.getElementById(projects[i]);
-                display.parentElement.remove();
-                projects.splice(i, 1);
-            }
-        }
-        localStorage.setItem("projects", JSON.stringify(projects));
-        populateForm(projects);
+        deleteProject(dropdown.value);
     }); 
-
-
 };
 
 //call local storage on page refresh
@@ -275,10 +210,11 @@ const submitDel = delProjPopup.appendChild(document.createElement('button'));
             items.forEach(item => {
                 newItem(item.title, item.project, item.complete);
             })
+            console.log(projects);
             console.log(items);
         }
      }   
- }
+ };
 
 
 
